@@ -1,0 +1,54 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.inputContainer {
+  margin: 10px;
+}
+
+input[type='text'] {
+  min-width: 320px;
+  font-size: 18px;
+  font-family: inherit;
+  line-height: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  outline-color: var(--primary-color);
+}
+
+h1 {
+  font-size: 3em; /* sets the font size to 3 times the default size */
+  background-image: linear-gradient(to right, white, var(--primary-color)); /* sets the background color to a linear gradient */
+  -webkit-background-clip: text; /* clips the background color to the text */
+  -webkit-text-fill-color: transparent; /* makes the text transparent, so the background color shows through */
+}
+
+/* Loader */
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
