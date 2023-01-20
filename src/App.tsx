@@ -5,8 +5,12 @@ function App() {
   const [handle, setHandle] = useState('')
   const [loading, setLoading] = useState(false)
   const [inputText, setInputText] = useState('')
+  const [tweets, setTweets] = useState([])
+  const [errorText, setErrorText] = useState('')
 
   async function getTweets(e: React.KeyboardEvent<HTMLInputElement>) {
+    setErrorText('')
+
     // If the user presses enter, send the message
     if (e.key === 'Enter' && !loading) {
       console.log(`Sending the following handle to the worker: ${handle}`)
@@ -21,10 +25,16 @@ function App() {
           handle: handle,
         }),
       })
-      response.text().then((data) => {
-        console.log(data)
+      if (response.ok) {
+        // Get the response from the worker
+        const tweets = await response.json()
+        console.log(`Received the following response from the worker: ${JSON.stringify(tweets)}`)
+        setTweets(tweets)
+
+      } else {
+        const errorText = await response.text()
+        setErrorText(errorText)
       }
-      )
     }
   }
 
@@ -70,14 +80,26 @@ function App() {
           {loading ? (
             <div className="lds-dual-ring"></div>
           ) : (
-            <input type="text"
-              placeholder='@GenCQBrownJr'
-              value={handle}
-              onChange={(e) => setHandle(e.target.value)}
-              onKeyDown={getTweets}
-            ></input>
+            <>
+              <input type="text"
+                placeholder='@GenCQBrownJr'
+                value={handle}
+                onChange={(e) => setHandle(e.target.value)}
+                onKeyDown={getTweets}
+              ></input>
+              <p>{errorText}</p>
+            </>
           )}
         </div>
+        {tweets.length > 0 && (
+          <div className="tweetsContainer">
+            {tweets.map((tweet: any) => (
+              <div className="tweet">
+                <p>{tweet.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </>
     </div>
   )

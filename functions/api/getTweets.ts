@@ -1,37 +1,90 @@
-/** * POST /api/submit */
+/** * POST /api/getTweets */
 
 export interface Env {
-    OPEN_API_KEY: string;
+  TWITTER_BEARER_TOKEN: string;
 }
 
-export async function onRequestPost({request, env}: {request: Request, env: Env}) {
-    // Parse the request body
-    console.log("request", request);
+interface TwitterResponse {
+  data: {
+    id: string;
+    name: string;
+    username: string;
+  };
+  errors: {
+    parameters: any;
+    message: string;
+  }[];
+}
 
-    console.log("env", env);
+export async function onRequestPost({
+  request,
+  env,
+}: {
+  request: Request;
+  env: Env;
+}) {
+  // Parse the request body
+  let handle: string;
+  try {
+    const data = await request.json();
+    // @ts-ignore
+    handle = data.handle;
+  } catch (err) {
+    return new Response(`Error parsing request body ${err}`, { status: 500 });
+  }
 
-    let handle: string;
-    try {
-        const data = await request.json();
-        // @ts-ignore
-        handle = data.handle;
-    } catch (err) {
-        return new Response(`Error parsing request body ${err}`, { status: 500 });
+  // Input validation
+  if (!handle) {
+    console.log("Missing required fields");
+    return new Response("Missing required fields", { status: 400 });
+  }
+
+  // Twitter bearer token
+  const bearerToken = env.TWITTER_BEARER_TOKEN;
+  if (!bearerToken) {
+    return new Response("Missing TWITTER_BEARER_TOKEN environment variable", {
+      status: 500,
+    });
+  }
+
+  const userIdEndpoint = `https://api.twitter.com/2/users/by/username/${handle}`;
+
+  // Set up the request options
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+
+  // Send the request to Twitter
+  const twitterUser = { id: "", name: "", username: "" };
+  try {
+    const response = await fetch(userIdEndpoint, options);
+    const data = (await response.json()) as TwitterResponse;
+    console.log(data);
+
+    if (data.errors) {
+      return new Response(`Twitter handle not found`, { status: 404 });
     }
-  
-    // Input validation
-    // if (!text) {
-    //   console.log("Missing required fields");
-    //   return new Response("Missing required fields", { status: 400 });
-    // }
-  
-    // OpenAI API key and config
-    // const apiKey = env.OPEN_API_KEY;
-    // if (!apiKey) {
-    //   return new Response("Missing OPEN_API_KEY environment variable", {
-    //     status: 500,
-    //   });
-    // }
 
-    return new Response(`Hello ${handle}`, { status: 200 });
+    twitterUser.id = data.data.id;
+  } catch (err) {
+    return new Response(`Error calling Twitter API /username ${err}`, {
+      status: 500,
+    });
+  }
+
+  // Get the user's tweets
+  const tweetsEndpoint = `https://api.twitter.com/2/users/${twitterUser.id}/tweets`;
+
+  try {
+    const response = await fetch(tweetsEndpoint, options)
+    const data = await response.json();
+    // @ts-ignore
+    return new Response(JSON.stringify(data.data), { status: 200 });
+  } catch (err) {
+    return new Response(`Error calling Twitter API /tweets ${err}`, { status: 500 });
+  }
 }
