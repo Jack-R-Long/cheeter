@@ -9,6 +9,22 @@
   margin: 10px;
 }
 
+.errorText {
+  color: red;
+}
+
+.tweetCompletion {
+  color: black;
+  max-width:490px;
+  background: #fff;
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius:3px;
+  padding: 30px;
+  border-bottom: 1px solid #e6ecf0;
+  border-top: 1px solid #e6ecf0;
+}
+
 input[type='text'] {
   min-width: 320px;
   font-size: 18px;

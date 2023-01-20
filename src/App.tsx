@@ -1,12 +1,20 @@
 import { useState } from 'react'
 import './App.css'
 
+interface Tweet {
+  id: string
+  text: string
+  edit_history_tweet_ids: string[]
+}
+
 function App() {
-  const [handle, setHandle] = useState('')
+  const [phase, setPhase] = useState('Input Handle')
+  const [handle, setHandle] = useState('GenCQBrownJR')
   const [loading, setLoading] = useState(false)
   const [inputText, setInputText] = useState('')
-  const [tweets, setTweets] = useState([])
+  const [tweets, setTweets] = useState<Tweet[]>([])
   const [errorText, setErrorText] = useState('')
+  const [tweetCompletion, setTweetCompletion] = useState('')
 
   async function getTweets(e: React.KeyboardEvent<HTMLInputElement>) {
     setErrorText('')
@@ -30,6 +38,7 @@ function App() {
         const tweets = await response.json()
         console.log(`Received the following response from the worker: ${JSON.stringify(tweets)}`)
         setTweets(tweets)
+        setPhase('Input Text')
 
       } else {
         const errorText = await response.text()
@@ -38,12 +47,11 @@ function App() {
     }
   }
 
-
-  async function submitText(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+  async function submitText(e: React.KeyboardEvent<HTMLInputElement>) {
     // If the user presses enter, send the message
     if (e.key === 'Enter' && !loading) {
-      e.preventDefault()
       setLoading(true)
+      setTweetCompletion('')
 
       console.log(`Sending the following text to the worker: ${inputText}`)
 
@@ -55,6 +63,7 @@ function App() {
         },
         body: JSON.stringify({
           text: inputText,
+          tweets: tweets,
         }),
       })
 
@@ -63,6 +72,7 @@ function App() {
         // Get the response from the worker
         const textCompletion = await response.text()
         console.log(`Received the following response from the worker: ${textCompletion}`)
+        setTweetCompletion(textCompletion)
         setLoading(false)
       } else {
         console.log("Error: " + response)
@@ -71,36 +81,64 @@ function App() {
     }
   }
 
-
   return (
     <div className="App">
-      <>
-        <h1>Cheeter 🐦</h1>
-        <div className="inputContainer">
-          {loading ? (
-            <div className="lds-dual-ring"></div>
-          ) : (
-            <>
-              <input type="text"
-                placeholder='@GenCQBrownJr'
-                value={handle}
-                onChange={(e) => setHandle(e.target.value)}
-                onKeyDown={getTweets}
-              ></input>
-              <p>{errorText}</p>
-            </>
-          )}
-        </div>
-        {tweets.length > 0 && (
-          <div className="tweetsContainer">
-            {tweets.map((tweet: any) => (
-              <div className="tweet">
-                <p>{tweet.text}</p>
-              </div>
-            ))}
+      {phase === 'Input Handle' && (
+        <>
+          <h1>Cheeter 🐦</h1>
+          <div className="inputContainer">
+            {loading ? (
+              <div className="lds-dual-ring"></div>
+            ) : (
+              <>
+                <input type="text"
+                  placeholder='@GenCQBrownJr'
+                  value={handle}
+                  onChange={(e) => setHandle(e.target.value)}
+                  onKeyDown={getTweets}
+                ></input>
+                <p className='errorText'>{errorText}</p>
+              </>
+            )}
           </div>
-        )}
-      </>
+        </>
+      )}
+
+      {phase === 'Input Text' && (
+        <>
+          <h1>New Tweet</h1>
+          <div className="inputContainer">
+            {loading ? (
+              <div className="lds-dual-ring"></div>
+            ) : (
+              <>
+                <input type="text"
+                  placeholder='Make a joke about @elonmusk'
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  onKeyDown={submitText}
+                ></input>
+                <p className='errorText'>{errorText}</p>
+              </>
+            )}
+          </div>
+          {tweetCompletion.length > 0 && (
+            <div className="tweetCompletion">
+              <p>{tweetCompletion}</p>
+            </div>
+          )}
+          {tweets.length > 0 && (
+            <div className="tweetsContainer">
+              <h1>Last 10 Tweets</h1>
+              {tweets.map((tweet: any) => (
+                <div className="tweet">
+                  <p>{tweet.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </div>
   )
 }
