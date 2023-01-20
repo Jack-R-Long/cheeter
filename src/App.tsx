@@ -6,6 +6,28 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [inputText, setInputText] = useState('')
 
+  async function getTweets(e: React.KeyboardEvent<HTMLInputElement>) {
+    // If the user presses enter, send the message
+    if (e.key === 'Enter' && !loading) {
+      console.log(`Sending the following handle to the worker: ${handle}`)
+
+      // Send handle to the worker
+      const response = await fetch("/api/getTweets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          handle: handle,
+        }),
+      })
+      response.text().then((data) => {
+        console.log(data)
+      }
+      )
+    }
+  }
+
 
   async function submitText(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     // If the user presses enter, send the message
@@ -42,20 +64,21 @@ function App() {
 
   return (
     <div className="App">
-        <>
-          <h1>Cheeter 🐦</h1>
-          <div className="inputContainer">
-            {loading ? (
-              <div className="lds-dual-ring"></div>
-            ) : (
-              <input type="text"
-                placeholder='@GenCQBrownJr'
-                value={handle}
-                onChange={(e) => setHandle(e.target.value)}
-              ></input>
-            )}
-          </div>
-        </>
+      <>
+        <h1>Cheeter 🐦</h1>
+        <div className="inputContainer">
+          {loading ? (
+            <div className="lds-dual-ring"></div>
+          ) : (
+            <input type="text"
+              placeholder='@GenCQBrownJr'
+              value={handle}
+              onChange={(e) => setHandle(e.target.value)}
+              onKeyDown={getTweets}
+            ></input>
+          )}
+        </div>
+      </>
     </div>
   )
 }
