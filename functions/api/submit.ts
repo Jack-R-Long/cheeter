@@ -62,7 +62,7 @@ function generatePrompt(text: string, tweets: Tweet[]) {
   for (let i = 0; i < tweets.length; i++) {
     tweetBlob += tweets[i].text;
   }
-  return `Here are my last ten tweets:\n${tweetBlob}\n\nWrite a new tweet about ${text}`;
+  return `Here are my last ten tweets\n\n${tweetBlob}\n\nWrite a new tweet about ${text}`;
 }
 
 export default onRequestPost;
