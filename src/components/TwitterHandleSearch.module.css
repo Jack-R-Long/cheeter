@@ -16,4 +16,5 @@
 .highlightedItem {
   cursor: pointer;
   padding: 5px;
+  background-color: var(--primary-color);
 }

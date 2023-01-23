@@ -28,8 +28,6 @@ const TwitterHandleSearch = () => {
   return (
     <>
       <Turnstone
-        autoFocus={true}
-        typeahead={true}
         debounceWait={250}
         listbox={listbox}
         placeholder='Enter a Twitter handle'
