@@ -504,6 +504,16 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
 
+escape-string-regexp@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-5.0.0.tgz"
+  integrity sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==
+
+first-of-type@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/first-of-type/-/first-of-type-1.0.0.tgz"
+  integrity sha512-dJSXNtPoczg+C5GBU3KW4U14zSK40uz43lNdJeXjv71PoCYdlrXdv8FnLJRFgFmSh7ocP4rvjIJDp4X/Ooz7vQ==
+
 fsevents@~2.3.2:
   version "2.3.2"
   resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
@@ -558,7 +568,7 @@ json5@^2.2.2:
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-loose-envify@^1.1.0:
+loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -589,10 +599,20 @@ nanoid@^3.3.4:
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.4.tgz"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
 
+natural-selection@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/natural-selection/-/natural-selection-1.0.1.tgz"
+  integrity sha512-+8ZPOu57Yw2fqAq3XGtdbVkJGwp8k4VYOGqx0Eg91nsKYn/utMOhKc+97jOTxqVcGwVMzCn2Bz6pTWFWGGH5kQ==
+
 node-releases@^2.0.6:
   version "2.0.8"
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.8.tgz"
   integrity sha512-dFSmB8fFHEH/s81Xi+Y/15DQY6VHW81nXRj86EMSL3lmuTmK1e+aT4wrFCkTbm+gSwkw4KpX+rT/pMM2c1mF+A==
+
+object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
+  integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
 
 path-parse@^1.0.7:
   version "1.0.7"
@@ -613,6 +633,15 @@ postcss@^8.4.20:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+prop-types@^15.8.1:
+  version "15.8.1"
+  resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
+  integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.13.1"
+
 react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
@@ -620,6 +649,11 @@ react-dom@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-is@^16.13.1:
+  version "16.13.1"
+  resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-refresh@^0.14.0:
   version "0.14.0"
@@ -661,10 +695,25 @@ semver@^6.3.0:
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
+setify@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/setify/-/setify-1.0.4.tgz"
+  integrity sha512-8CtOpqS2KtK7P40PeXVYzzDMw+vgrQtdy6QUGamSIFYoKSvB1OrIxnqiGmCD0r7lOm2BIebsqxuNNE+eY1b9Wg==
+  dependencies:
+    natural-selection "^1.0.1"
+
 source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
+
+split-match@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.npmjs.org/split-match/-/split-match-0.2.2.tgz"
+  integrity sha512-epdfqxwKjfpD3wE2aXPtwiWvic6z0V7tg+DGEfsH6i/eXdAfia9keoz1XB/Byz7OqSPmUuVM8jy1x8pv+7cH3A==
+  dependencies:
+    escape-string-regexp "^5.0.0"
+    prop-types "^15.8.1"
 
 supports-color@^5.3.0:
   version "5.5.0"
@@ -678,10 +727,34 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
+swr@^1.1.2:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/swr/-/swr-1.3.0.tgz"
+  integrity sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==
+
 to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/to-fast-properties/-/to-fast-properties-2.0.0.tgz"
   integrity sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==
+
+turnstone-recent-searches@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.npmjs.org/turnstone-recent-searches/-/turnstone-recent-searches-0.5.0.tgz"
+  integrity sha512-OFGRM92OKAx467QTYeJXJY5Uj1XhPiMmqiXwL1/wPky38SLXotyxVjFpMvCb8MuGsY61fsJDkF2vsmseae42VA==
+
+turnstone@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/turnstone/-/turnstone-2.2.0.tgz#9eedba9e69df4ef11527fe640e4219590138db82"
+  integrity sha512-/vlU5uOEqZuEaN/4n62uCNbZScGUf0eA2uEoCpy+L5zWR3zpMcYAnASmjlW2lDF+rIXpgeElFTV8z0E98HfG0g==
+  dependencies:
+    escape-string-regexp "^5.0.0"
+    first-of-type "^1.0.0"
+    prop-types "^15.8.1"
+    setify "^1.0.4"
+    split-match "^0.2.2"
+    swr "^1.1.2"
+    turnstone-recent-searches "^0.5.0"
+    use-debounce "^7.0.1"
 
 typescript@^4.9.3:
   version "4.9.4"
@@ -695,6 +768,11 @@ update-browserslist-db@^1.0.9:
   dependencies:
     escalade "^3.1.1"
     picocolors "^1.0.0"
+
+use-debounce@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.npmjs.org/use-debounce/-/use-debounce-7.0.1.tgz"
+  integrity sha512-fOrzIw2wstbAJuv8PC9Vg4XgwyTLEOdq4y/Z3IhVl8DAE4svRcgyEUvrEXu+BMNgMoc3YND6qLT61kkgEKXh7Q==
 
 vite@^4.0.0:
   version "4.0.4"

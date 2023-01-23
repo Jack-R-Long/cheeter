@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+// @ts-ignore
+import TwitterHandleSearch from './components/TwitterHandleSearch'
 
 interface Tweet {
   id: string
@@ -97,6 +99,7 @@ function App() {
                   onChange={(e) => setHandle(e.target.value)}
                   onKeyDown={getTweets}
                 ></input>
+                <TwitterHandleSearch />
                 <p className='errorText'>{errorText}</p>
               </>
             )}
